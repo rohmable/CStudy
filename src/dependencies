@@ -1,3 +1,0 @@
-handlers.o: handlers.cpp debug.h
-main.o: main.cpp debug.h
-time_module.o: time_module.cpp debug.h
