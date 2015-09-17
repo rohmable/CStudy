@@ -2,7 +2,7 @@
 #include <ctime>
 #include <cctype>
 #ifdef DEBUG_MODE
-	#include "debug.h"
+	#include "./include/debug.h"
 	#include <iostream>
 #else
 	#define DEB(a)
@@ -67,3 +67,47 @@ extern bool data_odierna_uint (unsigned int &g, unsigned int &m, unsigned int &a
 	
 	return true ;
 }
+
+extern int diff_giorni_da_attuale (int g, int m, int a)
+{
+	time_t oggi ;
+	time(&oggi) ;
+	VER(const int SIZE = 9 ;
+		char data[SIZE] ;
+		strftime(data, SIZE, "%d/%m/%y", localtime(&oggi)) ;
+		cout << "Data di oggi: " << data << endl
+			 << "Data selezionata: " << g << '/' << m << '/' << a << endl ) ;
+	tm data ;
+	data.tm_sec = 0 ; data.tm_min = 0 ; data.tm_hour = 0 ; data.tm_isdst = -1 ;
+	
+	data.tm_mday = g ;
+	data.tm_mon = m ;
+	data.tm_year = a - 1900 ;
+	
+	//Calcola la differenza in secondi delle due date tramite difftime e le converte in intero
+	int diff_secondi = static_cast<int>(difftime(mktime(&data), oggi)) ;
+	
+	VER(cout << "Differenza: " << (diff_secondi/3600)/24 << endl ) ;
+	return (diff_secondi/3600)/24 + 1; // ritorna la diffrenza in giorni
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

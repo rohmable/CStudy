@@ -1,7 +1,7 @@
 #include <gtk/gtk.h>
 #include <sstream>
 #ifdef DEBUG_MODE
-	#include "debug.h"
+	#include "./include/debug.h"
 	#include <iostream>
 #else
 	#define DEB(a)
@@ -9,8 +9,12 @@
 #endif
 using namespace std ;
 
+// Da save_load.cpp
+bool nuovo_esame (const char [], int , int [], int [], int , int) ;
+
 // Da time_module.cpp
 bool data_odierna_uint (unsigned int &, unsigned int &, unsigned int &) ;
+int diff_giorni_da_attuale (int g, int m, int a) ;
 // Da main.cpp
 extern unsigned int MASK ;
 extern GtkBuilder *builder ;
@@ -124,6 +128,17 @@ extern "C" void controllo_wizard (GtkAssistant *assistant, GtkWidget *page, gpoi
 		}
 		break ;
 	}
+	case 3: {
+		GtkAdjustment *g_rip = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "giorni_ripasso")) ;
+		int giorni_ripasso = static_cast<int>(gtk_adjustment_get_value(g_rip)) ;
+		unsigned int g_sel, m_sel, a_sel ;
+		gtk_calendar_get_date(GTK_CALENDAR(gtk_builder_get_object(builder, "giorno_esame")), &a_sel, &m_sel, &g_sel) ;
+		if (giorni_ripasso >= diff_giorni_da_attuale(static_cast<int>(g_sel), static_cast<int>(m_sel), static_cast<int>(a_sel))) {
+			messaggio_errore("Il numero di giorni di ripasso deve essere minore di quelli che mancano all'esame", GTK_WINDOW(assistant)) ;
+			corretto = false ;
+		}
+		break ;
+	}
 	default:
 		break ;
 	}
@@ -135,7 +150,44 @@ extern "C" void controllo_wizard (GtkAssistant *assistant, GtkWidget *page, gpoi
 	assicurato che ad ogni passo tutte le informazioni fossero corrette */
 extern "C" void applica_wizard (GtkAssistant *assistant, gpointer user_data)
 {
-	Gtk
+	GtkCalendar *giorno_esame = GTK_CALENDAR(gtk_builder_get_object(builder, "giorno_esame")) ;
+	GtkAdjustment *num_pagine = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "num_pagine")) ,
+				  *giorni_studio = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "sett")),
+				  *giorni_ripasso = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "giorni_ripasso")) ;
+	unsigned int giorno_att, mese_att, anno_att,
+				 giorno_sel, mese_sel, anno_sel ;
+	data_odierna_uint(giorno_att, mese_att, anno_att) ;
+	gtk_calendar_get_date(giorno_esame, &anno_sel, &mese_sel, &giorno_sel) ;
+	int pag = static_cast<int>(gtk_adjustment_get_value(num_pagine)),
+		studio_per_sett = static_cast<int>(gtk_adjustment_get_value(giorni_studio)),
+		gg_ripasso = static_cast<int>(gtk_adjustment_get_value(giorni_ripasso)),
+		gg_studio = diff_giorni_da_attuale (static_cast<int>(giorno_sel), static_cast<int>(mese_sel), static_cast<int>(anno_sel)) ;
+	gg_studio -= gg_ripasso ;
+	int pagine_al_giorno = (pag / (gg_studio/studio_per_sett)) ;
+	// La divisione potrebbe dare 0 pagine da studiare come parte intera della divisione, visto che e' impossibile
+	// si incrementa di uno
+	if (pagine_al_giorno == 0)
+		pagine_al_giorno ++ ;
+	VER(cout << "Pagine: " << pag << endl
+			 << "Giorni di studio: " << gg_studio << endl
+			 << "Studio alla settimana: " << studio_per_sett << endl
+			 << "Pagine al giorno = (" << pag << " / (" << gg_studio << '/' << studio_per_sett << ")) = " << pagine_al_giorno << endl ) ;
+	
+	GtkMessageDialog *conferma = GTK_MESSAGE_DIALOG(user_data) ;
+	stringstream buff ;
+	buff << "Si devono studiare (almeno) " << pagine_al_giorno << " pagine al giorno\nContinuare?" ;
+	gtk_message_dialog_format_secondary_text(conferma, buff.str().c_str()) ;
+	int conf = gtk_dialog_run(GTK_DIALOG(conferma)) ;
+	if (conf == GTK_RESPONSE_YES) {
+		const int DATA = 3 ;
+		int inizio[DATA] = {giorno_att, mese_att, anno_att},
+			esame[DATA] = {giorno_sel, mese_sel, anno_sel} ;
+		GtkEntryBuffer *nome_esame = GTK_ENTRY_BUFFER(gtk_builder_get_object(builder, "Nome_esame")) ;
+		if (!nuovo_esame(gtk_entry_buffer_get_text(nome_esame), pagine_al_giorno, inizio, esame, gg_studio, gg_ripasso))
+			messaggio_errore("C'e' stato un errore, impossibile creare il nuovo esame", GTK_WINDOW(assistant)) ;
+	}
+	else
+		nascondi_finestra(reinterpret_cast<gpointer>(conferma)) ;
 }
 
 

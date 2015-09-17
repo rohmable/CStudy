@@ -1,6 +1,6 @@
 CXXFLAGS=-Wall -export-dynamic -c `pkg-config --cflags gtk+-3.0`
 DEBUG=-D DEBUG_MODE
-OBJ=main.o handlers.o time_module.o
+OBJ=main.o handlers.o time_module.o save_load.o
 APP_NAME=CStudy
 
 CStudy: $(OBJ)

@@ -241,6 +241,7 @@
     <property name="can_focus">False</property>
     <property name="receives_default">True</property>
     <property name="modal">True</property>
+    <signal name="apply" handler="applica_wizard" object="Conferma_Wizard" swapped="no"/>
     <signal name="cancel" handler="annulla_wizard" swapped="no"/>
     <signal name="delete-event" handler="gtk_widget_hide_on_delete" swapped="no"/>
     <signal name="prepare" handler="controllo_wizard" swapped="no"/>
@@ -601,6 +602,40 @@ Premi "Successivo" per continuare.</property>
         <property name="page_type">custom</property>
         <property name="complete">True</property>
       </packing>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="Conferma_Wizard">
+    <property name="can_focus">False</property>
+    <property name="modal">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">assistant1</property>
+    <property name="attached_to">assistant1</property>
+    <property name="buttons">yes-no</property>
+    <property name="text" translatable="yes">Esame creato</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox6">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area6">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
     </child>
   </object>
   <object class="GtkSpinButton" id="spinbutton8">

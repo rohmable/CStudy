@@ -4,11 +4,11 @@
  *  Created on: 30 ago 2015
  *      Author: rohmable
  */
-#include <iostream>
 #include <cstring>
 
 #ifdef DEBUG_MODE
-	#include "debug.h"
+	#include "./include/debug.h"
+	#include <iostream>
 #else
 	#define DEB(a)
 	#define VER(a)
