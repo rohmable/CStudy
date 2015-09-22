@@ -5,7 +5,6 @@
  *      Author: rohmable
  */
 #include <cstring>
-
 #ifdef DEBUG_MODE
 	#include "./include/debug.h"
 	#include <iostream>
@@ -14,10 +13,12 @@
 	#define VER(a)
 #endif
 #include <gtk/gtk.h>
+#include "../lib/notify.h"
 using namespace std;
 
 unsigned int MASK = 0 ;
 GtkBuilder *builder ;
+extern char *percorso ;
 
 void messaggio_errore (const char messaggio[], GtkWindow *parent)
 {
@@ -60,7 +61,9 @@ int main (int argc, char *argv[]) {
 	builder = gtk_builder_new() ;
 	gtk_builder_add_from_file(builder, "gui.glade", NULL) ;
 	gtk_builder_connect_signals(builder, NULL) ;
+	notify_init ("CStudy");
 	gtk_main() ;
-	
+	g_free(percorso) ;
+	notify_uninit();
 	return 0 ;
 }

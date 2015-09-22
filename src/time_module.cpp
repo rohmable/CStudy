@@ -10,7 +10,6 @@
 #endif
 using namespace std ;
 
-// Da main.cpp
 extern unsigned int MASK ;
 
 /** Converte una stringa contenente caratteri numerici nell' intero senza segno che rappresenta
@@ -68,6 +67,9 @@ extern bool data_odierna_uint (unsigned int &g, unsigned int &m, unsigned int &a
 	return true ;
 }
 
+/** Calcola il numero di giorni che separano la data attuale da quella passata alla funzione
+	@param[in] g,m,a data di cui calcolare la distanza
+	@param[out] differenza di giorni dal giorno attuale*/
 extern int diff_giorni_da_attuale (int g, int m, int a)
 {
 	time_t oggi ;
@@ -88,7 +90,29 @@ extern int diff_giorni_da_attuale (int g, int m, int a)
 	int diff_secondi = static_cast<int>(difftime(mktime(&data), oggi)) ;
 	
 	VER(cout << "Differenza: " << (diff_secondi/3600)/24 << endl ) ;
-	return (diff_secondi/3600)/24 + 1; // ritorna la diffrenza in giorni
+	return (diff_secondi/3600)/24 + 1; // ritorna la differenza in giorni
+}
+
+/** Calcola il numero di pagine da studiare in un giorno, se la divisione intera da' un numero minore di uno, ::pagine_al_giorno viene
+	incrementato di uno per rendere possibile lo studio delle pagine
+	@param[in] g,m,a data dell'esame
+	@param[in] pagine pagine da studiare
+	@param[in] giorni_st_sett giorni di studio in una settimana
+	@param[in] giorni_ripasso giorni da dedicare al ripasso
+	@param[out] pagine_al_giorno numero di pagine da studiare in un giorno */
+extern int calcola_pagine_al_giorno (unsigned int g, unsigned int m, unsigned int a, int pagine, int giorni_st_sett, int giorni_ripasso)
+{
+	VER(cout << "Calcolo il numero di pagine in un giorno" << endl ) ;
+	int giorni_per_studiare = diff_giorni_da_attuale (static_cast<int>(g), static_cast<int>(m), static_cast<int>(a)) - giorni_ripasso,
+		pagine_al_giorno = 0 ;
+	if (giorni_per_studiare/giorni_st_sett == 0)
+		pagine_al_giorno = pagine ;
+	else
+		pagine_al_giorno = pagine/(giorni_per_studiare/giorni_st_sett) ;
+	VER(cout << "Pagine al giorno = " << pagine_al_giorno << endl ) ;
+	if (pagine_al_giorno == 0)
+		pagine_al_giorno ++ ;
+	return pagine_al_giorno ;
 }
 
 

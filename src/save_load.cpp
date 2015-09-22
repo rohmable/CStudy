@@ -1,7 +1,6 @@
-#include <cstdlib>
 #include <fstream>
-#include <ctime>
 #include <sstream>
+#include <limits>
 #ifdef DEBUG_MODE
 	#include "./include/debug.h"
 	#include <iostream>
@@ -11,55 +10,141 @@
 #endif
 using namespace std ;
 
-const int DATA = 3 ;
+#include "include/time_module.h"
+#include "include/esame.h"
 
-// Da main.cpp
 extern unsigned int MASK ;
+esame_t esame ;
+pomodoro_t timer ;
+char *percorso ;
 
-/** Crea una cartella di nome ::nome (se non esiste) e vi salva un file "data.txt" in cui vengono scritti:
-	@param[in] pag numero di pagine da studiare per l'esame
-	@param[in] data_in[] data del primo giorno di studio
-		@li data_in[0] Giorno
-		@li data_in[1] Mese
-		@li data_in[2] Anno
-	@param[in] data_es[] data dell'esame
-		@li data_es[0] Giorno
-		@li data_es[1] Mese
-		@li data_es[2] Anno
-	@param[in] gg_st Giorni di studio settimanali
-	@param[in] gg_rip Giorni di ripasso
-	*/
-extern bool nuovo_esame (const char nome[], int pag, int data_in[DATA], int data_es[DATA], int gg_st, int gg_rip)
+/** Carica i dati da <percorso>/data.txt */
+extern bool carica_base ()
 {
-	DEB(cout << "Creo nuovo esame" << endl ) ;
-	stringstream buff ;
-	buff << "mkdir ./saves/" << nome ;
-	VER(cout << "Creo la cartella " << buff.str().c_str() << endl ) ;
-	if (system(buff.str().c_str()) != 0) {
-		DEB(cout << "Stato di errore diverso da zero, forse la cartella e' gia' esistente?" << endl ) ;
+	VER(cout << "Carico i dati di base" << endl ) ;
+	stringstream file ;
+	file << percorso << "/data.txt" ;
+	VER(cout << "Percorso: " << file.str().c_str() << endl ) ;
+	ifstream data (file.str().c_str()) ;
+	if (!data) {
+		data.close() ;
+		DEB(cout << "Errore nel caricamento di \"" << file.str().c_str() << '\"' << endl ) ;
 		return false ;
 	}
-	buff.str("") ;
-	buff << "./saves/" << nome << "/data.txt" ;
-	VER(cout << "Scrivo su " << buff.str().c_str() << endl ) ;
-	ofstream salva (buff.str().c_str()) ;
-	if (!salva) {
-		DEB(cout << "Impossibile aprire " << buff.str().c_str() << endl ) ;
-		salva.close() ;
+	data >> esame.g_inizio >> esame.m_inizio >> esame.a_inizio ;
+	data.ignore(numeric_limits<streamsize>::max(), '\n') ;
+	data >> esame.g_esame >> esame.m_esame >> esame.a_esame ;
+	data.ignore(numeric_limits<streamsize>::max(), '\n') ;
+	data >> esame.pag ;
+	data.ignore(numeric_limits<streamsize>::max(), '\n') ;
+	data >> esame.gg_studio_sett ;
+	data.ignore(numeric_limits<streamsize>::max(), '\n') ;
+	data >> esame.gg_ripasso ;
+	data.ignore(numeric_limits<streamsize>::max(), '\n') ;
+	data >> esame.pag_per_giorno ;
+	VER(cout << "Data inizio: " << esame.g_inizio << '/' << esame.m_inizio << '/' << esame.a_inizio << endl
+			 << "Data esame: " << esame.g_esame << '/' << esame.m_esame << '/' << esame.a_esame << endl
+			 << "Pagine da studiare: " << esame.pag << endl
+			 << "Giorni di studio alla settimana: " << esame.gg_studio_sett << endl
+			 << "Giorni di ripasso: " << esame.gg_ripasso << endl
+			 << "Pagine al giorno: " << esame.pag_per_giorno << endl ) ;
+	DEB(cout << "Caricamento dati di base effettuato con successo" << endl ) ;
+	data.close() ;
+	return true ;
+}
+
+/** Carica i tempi del timer da <percorso>/times.txt */
+extern bool carica_timer ()
+{
+	VER(cout << "Carico i dati del timer" << endl ) ;
+	stringstream file ;
+	file << percorso << "/times.txt" ;
+	VER(cout << "Percorso: " << file.str().c_str() << endl ) ;
+	ifstream times(file.str().c_str()) ;
+	if (!times) {
+		times.close() ;
+		DEB(cout << "Errore nel caricamento di \"" << file.str().c_str() << '\"' << endl ) ;
 		return false ;
 	}
-	else {
-		salva << "# Numero di pagine da studiare" << endl << pag << endl
-			  << "# Data di inizio dello studio" << endl ;
-		for (int i = 0 ; i < DATA ; i ++) salva << data_in[i] << ' ' ;
-		salva << endl ;
-		salva << "# Data dell'esame" << endl ;
-		for (int i = 0 ; i < DATA ; i ++) salva << data_es[i] << ' ' ;
-		salva << "\n# Giorni di studio alla settimana" << endl << gg_st << endl 
-			  << "# Giorni di ripasso prima dell'esame" << endl << gg_rip ;
+	times >> timer.lavoro ;
+	times.ignore(numeric_limits<streamsize>::max(), '\n') ;
+	times >> timer.pausa_corta ;
+	times.ignore(numeric_limits<streamsize>::max(), '\n') ;
+	times >> timer.pausa_lunga ;
+	times.close() ;
+	VER(cout << "Lavoro: " << timer.lavoro << endl
+			 << "Pausa corta: " << timer.pausa_corta << endl 
+			 << "Pausa lunga: " << timer.pausa_lunga << endl ) ;
+	return true ;
+}
+
+/** Scrive i tempi del timer in <percorso>/times.txt */
+extern bool salva_timer ( )
+{
+	VER(cout << "Salvo i dati del timer" << endl ) ;
+	stringstream file ;
+	file << percorso << "/times.txt" ;
+	VER(cout << "Percorso: " << file.str().c_str() << endl ) ;
+	ofstream times(file.str().c_str()) ;
+	if (!times) {
+		times.close() ;
+		DEB(cout << "Impossibile aprire \"" << file.str().c_str() << "\" in scrittura" << endl ) ;
+		return false ;
 	}
-	salva.close() ;
-	DEB(cout << "Nuovo esame creato con successo" << endl) ;
+	times << timer.lavoro << " # Lavoro" << endl
+		  << timer.pausa_corta << " # Pausa Corta" << endl
+		  << timer.pausa_lunga << " # Pausa Lunga" << endl ;
+	times.close() ;
+	return true ;
+}
+
+/** Crea i dati principali per un nuovo esame nel ::percorso
+	@param[in] percorso il percorso in cui salvare il file data.txt
+	@param[in] g,m,a data dell'esame
+	@param[in] pag pagine da studiare
+	@param[in] giorni_st_sett giorni di studio alla settimana
+	@param[in] giorni_rip giorni di ripasso */
+extern bool nuovo_esame (unsigned int g, unsigned int m, unsigned int a, int pag, int giorni_st_sett, int giorni_rip)
+{
+	VER(cout << "Creo nuovo esame" << endl ) ;
+	stringstream file ;
+	file << percorso << "/data.txt" ;
+	VER(cout << "Salvo i dati principali su " << file.str().c_str() << endl ) ;
+	ofstream data(file.str().c_str()) ;
+	if (!data) {
+		data.close() ;
+		DEB(cout << "Errore nell'apertura del percorso \"" << file.str().c_str() << "\" in scrittura" << endl
+				 << "Si e' per caso scelto un percorso protetto in scrittura?" << endl ) ;
+		data.close() ;
+		return false ;
+	}
+	unsigned int g_att, m_att, a_att ;
+	data_odierna_uint(g_att, m_att, a_att) ;
+	data << g_att << ' ' << m_att << ' ' << a_att << " # Data inizio esame" << endl
+		 << g << ' ' << m << ' ' << a << " # Data dell'esame" << endl
+		 << pag << " # Pagine da studiare" << endl
+		 << giorni_st_sett << " # Giorni di studio per settimana" << endl 
+		 << giorni_rip << " # Giorni di ripasso prima dell'esame" << endl
+		 << calcola_pagine_al_giorno(g, m, a, pag,giorni_st_sett, giorni_rip) << " # Pagine da studiare al giorno" ;
+	VER(cout << "# Data inizio esame" << endl
+		 	<< g_att << ' ' << m_att << ' ' << a_att << endl
+			<< "# Data dell'esame" << endl
+		 	<< g << ' ' << m << ' ' << a << endl
+		 	<< "# Pagine da studiare" << endl
+		 	<< pag << endl
+		 	<< "# Giorni di studio per settimana" << endl 
+		 	<< giorni_st_sett << endl
+		 	<< "# Giorni di ripasso prima dell'esame" << endl
+		 	<< giorni_rip << endl
+		 	<< "# Pagine da studiare al giorno" << endl
+		 	<< calcola_pagine_al_giorno(g, m, a, pag,giorni_st_sett, giorni_rip) << endl );
+	data.close() ;
+	VER(cout << "Popolo esame" << endl );
+	data_odierna_uint(esame.g_inizio, esame.m_inizio, esame.a_inizio) ;
+	esame.g_esame = g ; esame.m_esame = m ; esame.a_esame = a ;
+	esame.pag = pag ; esame.gg_ripasso = giorni_rip ; esame.gg_studio_sett = giorni_st_sett ;
+	esame.pag_per_giorno = calcola_pagine_al_giorno(g, m, a, pag,giorni_st_sett, giorni_rip) ;
+	DEB(cout << "Nuovo esame creato con successo" << endl ) ;
 	return true ;
 }
 
