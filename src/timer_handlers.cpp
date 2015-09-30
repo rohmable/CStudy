@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include <sstream>
+#include <string>
 #ifdef DEBUG_MODE
 	#include "./include/debug.h"
 	#include <iostream>
@@ -9,51 +10,56 @@
 #endif
 using namespace std ;
 
-#include "include/main.h"
 #include "include/esame.h"
+#include "include/main.h"
 #include "include/save_load.h"
 #include "../lib/notify.h"
 
 enum tipo_timer_t {LAVORO, PAUSA_CORTA, PAUSA_LUNGA} ;
 
+
 static unsigned int timer_tag, timer_tempo ;
-static unsigned int numero_lavoro = 0, numero_pa_corte = 0, numero_pa_lunghe = 0 ;
 static bool timer_funzionante = false ;
 static tipo_timer_t timer_tipo ;
+
+static void imposta_label_timer (unsigned int sec, GtkLabel *label)
+{
+	VER(cout << "Aggiorno label con " << sec << " secondi" << endl ) ;
+	stringstream buff ;
+	buff << (sec/60)/10 << (sec/60)%10 << ':' << (sec%60)/10 << (sec%60)%10 ;
+	gtk_label_set_text(label, buff.str().c_str()) ;
+}
 
 extern "C" void timer_show (GtkWidget *widget, gpointer user_data)
 {
 	carica_timer() ;
-	stringstream buff ;
-	buff << timer.lavoro << ":00" ;
-	gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "timer")), buff.str().c_str()) ;
+	imposta_label_timer(timer.lavoro*60, GTK_LABEL(gtk_builder_get_object(builder, "timer"))) ;
 }
 
 static gboolean countdown (gpointer user_data)
 {
 	timer_tempo -- ;
-	VER(cout << "Tempo = " << timer_tempo << endl ) ;
-	stringstream buff ;
-	buff << timer_tempo/60 << ':' << timer_tempo%60 ;
-	gtk_label_set_text(GTK_LABEL(gtk_builder_get_object(builder, "timer")), buff.str().c_str()) ;
+	imposta_label_timer(timer_tempo, GTK_LABEL(gtk_builder_get_object(builder, "timer"))) ;
 	if ( timer_tempo == 0 ) {
 		timer_funzionante = false ;
 		NotifyNotification * stop = notify_notification_new ("CStudy", "Il timer e' terminato", "dialog-information") ;
 		notify_notification_show (stop, NULL) ;
 		g_object_unref(G_OBJECT(stop)) ;
+		GtkAdjustment *value ;
 		switch (timer_tipo) {
 		case LAVORO:
-			numero_lavoro ++ ;
-			GtkSpinButton *button = GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "lavoro_num")) ;
-			gtk_spin_button_set_value (button, gtk_spin_button_get_value(button) + 1) ;
+			value = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "num_lavoro")) ;
 			break ;
 		case PAUSA_CORTA:
-			numero_pa_corte ++ ;
+			value = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "num_p_corte")) ;
 			break ;
 		case PAUSA_LUNGA:
-			numero_pa_lunghe ++ ;
+			value = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "num_p_lunghe")) ;
+			break ;
+		default:
 			break ;
 		}
+		gtk_adjustment_set_value(value, gtk_adjustment_get_value(value) + 1) ;
 		return G_SOURCE_REMOVE ;
 	}
 	else
@@ -66,6 +72,7 @@ extern "C" void lavoro_timer (GtkButton *button, gpointer user_data)
 	VER(cout << "Timer lavoro = " << timer_tempo << endl ) ;
 	timer_funzionante = true ;
 	timer_tipo = LAVORO ;
+	imposta_label_timer(timer_tempo, GTK_LABEL(user_data)) ;
 	timer_tag = g_timeout_add_seconds(1, countdown, NULL) ;
 }
 
@@ -75,6 +82,7 @@ extern "C" void pausa_corta_timer (GtkButton *button, gpointer user_data)
 	VER(cout << "Timer pausa corta = " << timer_tempo << endl ) ;
 	timer_funzionante = true ;
 	timer_tipo = PAUSA_CORTA ;
+	imposta_label_timer(timer_tempo, GTK_LABEL(user_data)) ;
 	timer_tag = g_timeout_add_seconds(1, countdown, NULL) ;
 }
 
@@ -84,6 +92,7 @@ extern "C" void pausa_lunga_timer (GtkButton *button, gpointer user_data)
 	VER(cout << "Timer pausa lunga = " << timer_tempo << endl ) ;
 	timer_funzionante = true ;
 	timer_tipo = PAUSA_LUNGA ;
+	imposta_label_timer(timer_tempo, GTK_LABEL(user_data)) ;
 	timer_tag = g_timeout_add_seconds(1, countdown, NULL) ;
 }
 

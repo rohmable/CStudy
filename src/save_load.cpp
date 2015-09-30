@@ -1,6 +1,8 @@
 #include <fstream>
 #include <sstream>
 #include <limits>
+#include <string>
+#include <glib.h>
 #ifdef DEBUG_MODE
 	#include "./include/debug.h"
 	#include <iostream>
@@ -16,7 +18,9 @@ using namespace std ;
 extern unsigned int MASK ;
 esame_t esame ;
 pomodoro_t timer ;
+stat_t stats ;
 char *percorso ;
+GSList *lista = NULL ;
 
 /** Carica i dati da <percorso>/data.txt */
 extern bool carica_base ()
@@ -144,7 +148,139 @@ extern bool nuovo_esame (unsigned int g, unsigned int m, unsigned int a, int pag
 	esame.g_esame = g ; esame.m_esame = m ; esame.a_esame = a ;
 	esame.pag = pag ; esame.gg_ripasso = giorni_rip ; esame.gg_studio_sett = giorni_st_sett ;
 	esame.pag_per_giorno = calcola_pagine_al_giorno(g, m, a, pag,giorni_st_sett, giorni_rip) ;
+	VER(cout << "Popolo timer" << endl ) ;
+	timer.lavoro = 25 ; timer.pausa_corta = 5 ; timer.pausa_lunga = 15 ;
+	VER(cout << "Azzero statistiche" << endl ) ;
+	data_odierna_uint(stats.g_ultimo_agg, stats.m_ultimo_agg, stats.a_ultimo_agg) ;
+	stats.lavoro_giorno = 0 ; stats.lavoro_sett = 0 ;
+	salva_timer() ;
 	DEB(cout << "Nuovo esame creato con successo" << endl ) ;
 	return true ;
 }
+
+static void stampa_carta (ofstream &stream, const char *domanda, const char *risposta, int scadenza)
+{
+	stream << scadenza << endl
+		   << "--INIZIO_DOMANDA--" << endl
+		   << domanda << endl
+		   << "--FINE_DOMANDA--" << endl << "--INIZIO_RISPOSTA--" << endl
+		   << risposta << endl 
+		   << "--FINE_RISPOSTA--" << endl ;
+}
+
+/** Salva in <percorso>/cards.txt una carta assieme alla scadenza */
+extern bool aggiungi_carta (const char *domanda, const char *risposta, int scadenza)
+{
+	stringstream file ;
+	file << percorso << "/cards.txt" ;
+	ofstream carta (file.str().c_str(), ofstream::app) ;
+	if (!carta) {
+		carta.close() ;
+		DEB(cout << "Impossibile aprire \"" << file.str().c_str() << '\"' << endl ) ;
+		return false ;
+	}
+	VER(cout << "Salvo la carta in \"" << file.str().c_str() << endl ) ;
+	stampa_carta(carta, domanda, risposta, scadenza) ;
+	carta.close() ;
+	DEB(cout << "Carta salvata con successo" << endl ) ;
+	return true ;
+}
+
+/** Legge il testo da due delimitatori, riga per riga
+	@param[in] stream lo streaming in input da cui leggere
+	@param[in,out] stringa la stringa in cui salvare il testo
+	@param[in] inizio prima stringa delimitatrice
+	@param[in] fine seconda stringa delimitatrice */
+static void leggi_tra_delim (istream &stream, string &stringa, const string &inizio, const string &fine)
+{
+	string buff ;
+	getline(stream, buff) ;
+	if (buff == inizio) {
+		while (true) {
+			getline(stream, buff) ;
+			if (buff == fine)
+				return ;
+			else
+				stringa += buff ;
+		}
+	}
+}
+
+extern gint compara_scadenze (gconstpointer a, gconstpointer b)
+{
+	const flashcards_t *carta_a = static_cast<const flashcards_t*>(a),
+					   *carta_b = static_cast<const flashcards_t*>(b) ;
+				 
+	return carta_a->scadenza - carta_b->scadenza ;
+}
+
+/** Carica le carte da <percorso>/cards.txt e le inserisce in una lista
+	Se la lettura del file fallisce o il file e' vuoto ritorna un puntatore NULL */
+extern void carica_carte ( )
+{
+	stringstream file ;
+	file << percorso << "/cards.txt" ;
+	ifstream carte (file.str().c_str()) ;
+	if (!carte) {
+		DEB(cout << "Impossibile aprire \"" << file.str().c_str() << endl ) ;
+		lista = NULL ;
+		return ;
+	}
+	VER(cout << "Carico le carte da " << file.str().c_str() << endl ) ;
+	flashcards_t *elem = NULL ;
+	while (true) {
+		elem = new flashcards_t ;
+		carte >> elem->scadenza ;
+		carte.ignore() ;
+		if (carte.eof()) {
+			VER(cout << "Caricamento terminato" << endl ) ;
+			carte.close() ;
+			delete elem ;
+			return ;
+		}
+		leggi_tra_delim(carte, elem->domanda, "--INIZIO_DOMANDA--", "--FINE_DOMANDA--") ;
+		leggi_tra_delim(carte, elem->risposta, "--INIZIO_RISPOSTA--", "--FINE_RISPOSTA--") ;
+		gpointer data = static_cast<gpointer>(elem) ;
+		lista = g_slist_insert_sorted(lista, data, compara_scadenze) ;
+	}
+}
+
+extern bool salva_carte ( )
+{
+	stringstream file ;
+	file << percorso << "/cards.txt" ;
+	ofstream carte (file.str().c_str()) ;
+	if (!carte) {
+		DEB(cout << "Impossibile aprire \"" << file.str().c_str() << endl ) ;
+		return false ;
+	}
+	
+	GSList *elem = lista ;
+	while (elem != NULL)
+		stampa_carta(carte, static_cast<flashcards_t *>(elem->data)->domanda.c_str(), static_cast<flashcards_t *>(elem->data)->risposta.c_str(),
+					static_cast<flashcards_t *>(elem->data)->scadenza) ;
+	carte.close() ;
+	return true ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

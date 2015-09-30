@@ -1,6 +1,6 @@
 CXXFLAGS += -Wall -export-dynamic -c `pkg-config --cflags gtk+-3.0` `pkg-config --cflags libnotify`
 DEBUG= -D DEBUG_MODE
-OBJ=main.o base_handlers.o time_module.o save_load.o timer_handlers.o
+OBJ=main.o base_handlers.o time_module.o save_load.o timer_handlers.o flashcards_handlers.o
 APP_NAME=CStudy
 
 CStudy: $(OBJ)

@@ -1,9 +1,3 @@
-/*
- * main.cpp
- *
- *  Created on: 30 ago 2015
- *      Author: rohmable
- */
 #include <cstring>
 #ifdef DEBUG_MODE
 	#include "./include/debug.h"
@@ -13,8 +7,11 @@
 	#define VER(a)
 #endif
 #include <gtk/gtk.h>
+#include <string>
 #include "../lib/notify.h"
 using namespace std;
+
+#include "include/esame.h"
 
 unsigned int MASK = 0 ;
 GtkBuilder *builder ;

@@ -7,3 +7,13 @@ struct esame_t {
 struct pomodoro_t {
 	unsigned int lavoro, pausa_corta, pausa_lunga ;
 } ;
+
+struct stat_t {
+	unsigned int g_ultimo_agg, m_ultimo_agg, a_ultimo_agg ;
+	int lavoro_giorno, lavoro_sett ;
+} ;
+
+struct flashcards_t {
+	int scadenza ;
+	string domanda, risposta ;
+} ;

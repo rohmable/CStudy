@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include <sstream>
+#include <string>
 #ifdef DEBUG_MODE
 	#include "./include/debug.h"
 	#include <iostream>
