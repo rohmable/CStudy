@@ -1,3 +1,6 @@
+/** @file
+	File che si occupa di fornire alcune funzioni per fornire differenze tra date, la data attuale ecc.
+*/
 #include <sstream>
 #include <ctime>
 #include <cctype>
@@ -12,7 +15,8 @@ using namespace std ;
 
 extern unsigned int MASK ;
 
-/** Converte una stringa contenente caratteri numerici nell' intero senza segno che rappresenta
+/** Converte una stringa contenente caratteri numerici nell' intero senza segno che rappresenta.
+
 	@param[in] stringa la stringa contenente il numero
 	@param[in] size la grandezza della stringa (per controllare se la stringa contiene solo numeri)
 	@param[out] num variabile in cui verra' inserito il numero
@@ -31,7 +35,8 @@ static bool converti_stringa_in_numero (const char stringa[], const int size, un
 	return true ;
 }
 
-/** Fornisce la data odierna nel formato mm/gg/aaaa
+/** Fornisce la data odierna nel formato mm/gg/aaaa.
+
 	@param[in,out] g giorno
 	@param[in,out] m mese
 	@param[in,out] a anno
@@ -67,9 +72,11 @@ extern bool data_odierna_uint (unsigned int &g, unsigned int &m, unsigned int &a
 	return true ;
 }
 
-/** Calcola il numero di giorni che separano la data attuale da quella passata alla funzione
+/** Calcola il numero di giorni che separano la data attuale da quella passata alla funzione.
+
 	@param[in] g,m,a data di cui calcolare la distanza
-	@param[out] differenza di giorni dal giorno attuale*/
+	@return differenza di giorni dal giorno attuale
+*/
 extern int diff_giorni_da_attuale (int g, int m, int a)
 {
 	time_t oggi ;
@@ -90,16 +97,17 @@ extern int diff_giorni_da_attuale (int g, int m, int a)
 	int diff_secondi = static_cast<int>(difftime(mktime(&data), oggi)) ;
 	
 	VER(cout << "Differenza: " << (diff_secondi/3600)/24 << endl ) ;
-	return (diff_secondi/3600)/24 + 1; // ritorna la differenza in giorni
+	return (diff_secondi/3600)/24 ; // ritorna la differenza in giorni
 }
 
-/** Calcola il numero di pagine da studiare in un giorno, se la divisione intera da' un numero minore di uno, ::pagine_al_giorno viene
-	incrementato di uno per rendere possibile lo studio delle pagine
+/** Calcola il numero di pagine da studiare in un giorno, se la divisione intera da' un numero minore di uno, 
+	esame_t::pagine_al_giorno viene	incrementato di uno per rendere possibile lo studio delle pagine.
+	
 	@param[in] g,m,a data dell'esame
 	@param[in] pagine pagine da studiare
 	@param[in] giorni_st_sett giorni di studio in una settimana
 	@param[in] giorni_ripasso giorni da dedicare al ripasso
-	@param[out] pagine_al_giorno numero di pagine da studiare in un giorno */
+*/
 extern int calcola_pagine_al_giorno (unsigned int g, unsigned int m, unsigned int a, int pagine, int giorni_st_sett, int giorni_ripasso)
 {
 	VER(cout << "Calcolo il numero di pagine in un giorno" << endl ) ;

@@ -3,6 +3,15 @@ DEBUG= -D DEBUG_MODE
 OBJ=main.o base_handlers.o time_module.o save_load.o timer_handlers.o flashcards_handlers.o
 APP_NAME=CStudy
 
+
+all:
+	make depend
+	make CStudy
+
+debug:
+	make depend_DEBUG
+	make CStudy_DEBUG
+
 CStudy: $(OBJ)
 	g++ -o $(APP_NAME) $^ `pkg-config --libs gtk+-3.0` `pkg-config --libs libnotify` -export-dynamic
 
@@ -13,7 +22,7 @@ CStudy_DEBUG: CStudy
 
 .PHONY: depend_debug depend clean cleanall
 
-depend_debug:
+depend_DEBUG:
 	g++ -MM -D DEBUG_MODE *.cpp > dependencies
 
 depend:

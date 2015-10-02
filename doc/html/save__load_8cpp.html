@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>CStudy: Riferimenti per il file save_load.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="icon.gif"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">CStudy
+   </div>
+   <div id="projectbrief">Suite di studio</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Strutture&#160;dati</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;globali</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definizioni</a> &#124;
+<a href="#func-members">Funzioni</a> &#124;
+<a href="#var-members">Variabili</a>  </div>
+  <div class="headertitle">
+<div class="title">Riferimenti per il file save_load.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>File che si occupa del salvataggio e del caricamento di <a class="el" href="structesame__t.html" title="Informazioni relative ad un esame. ">esame_t</a>, <a class="el" href="structpomodoro__t.html" title="Tempi per il timer. ">pomodoro_t</a> e <a class="el" href="structflashcards__t.html" title="Informazioni relative ad una carta. ">flashcards_t</a>.  
+<a href="#details">Continua...</a></p>
+<div class="textblock"><code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;glib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="time__module_8h_source.html">include/time_module.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="esame_8h_source.html">include/esame.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Definizioni</h2></td></tr>
+<tr class="memitem:af9daf8fa9b1aa8d19df9e06f33871a7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#af9daf8fa9b1aa8d19df9e06f33871a7e">DEB</a>(a)</td></tr>
+<tr class="separator:af9daf8fa9b1aa8d19df9e06f33871a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d0eafe6b6c5caf54766199e3d46c7da"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a5d0eafe6b6c5caf54766199e3d46c7da">VER</a>(a)</td></tr>
+<tr class="separator:a5d0eafe6b6c5caf54766199e3d46c7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr class="memitem:ac22acc63f903cd38cba9f8295ef36cdc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#ac22acc63f903cd38cba9f8295ef36cdc">carica_base</a> ()</td></tr>
+<tr class="memdesc:ac22acc63f903cd38cba9f8295ef36cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carica i dati da <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/data.txt .  <a href="#ac22acc63f903cd38cba9f8295ef36cdc">Continua...</a><br /></td></tr>
+<tr class="separator:ac22acc63f903cd38cba9f8295ef36cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eaee6dceb30fd1b20544d033f15dfd4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a4eaee6dceb30fd1b20544d033f15dfd4">carica_timer</a> ()</td></tr>
+<tr class="memdesc:a4eaee6dceb30fd1b20544d033f15dfd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carica i tempi del timer da <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/times.txt .  <a href="#a4eaee6dceb30fd1b20544d033f15dfd4">Continua...</a><br /></td></tr>
+<tr class="separator:a4eaee6dceb30fd1b20544d033f15dfd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39578171d110b56ceb545a5c2780a298"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a39578171d110b56ceb545a5c2780a298">salva_timer</a> ()</td></tr>
+<tr class="memdesc:a39578171d110b56ceb545a5c2780a298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrive i tempi del timer in <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/times.txt.  <a href="#a39578171d110b56ceb545a5c2780a298">Continua...</a><br /></td></tr>
+<tr class="separator:a39578171d110b56ceb545a5c2780a298"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7851c93b668f8107b543b8312b7187b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a7851c93b668f8107b543b8312b7187b1">nuovo_esame</a> (unsigned int g, unsigned int m, unsigned int a, int pag, int giorni_st_sett, int giorni_rip)</td></tr>
+<tr class="memdesc:a7851c93b668f8107b543b8312b7187b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea i dati principali per un nuovo esame nel percorso.  <a href="#a7851c93b668f8107b543b8312b7187b1">Continua...</a><br /></td></tr>
+<tr class="separator:a7851c93b668f8107b543b8312b7187b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4442bcbffc2ff7a663b354b6bffa20e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a4442bcbffc2ff7a663b354b6bffa20e8">aggiungi_carta</a> (const char *domanda, const char *risposta, int scadenza)</td></tr>
+<tr class="memdesc:a4442bcbffc2ff7a663b354b6bffa20e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Salva in <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/cards.txt una carta assieme alla scadenza.  <a href="#a4442bcbffc2ff7a663b354b6bffa20e8">Continua...</a><br /></td></tr>
+<tr class="separator:a4442bcbffc2ff7a663b354b6bffa20e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a790fdc654a9735345728889ca795f32a"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a790fdc654a9735345728889ca795f32a">compara_scadenze</a> (gconstpointer a, gconstpointer b)</td></tr>
+<tr class="memdesc:a790fdc654a9735345728889ca795f32a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione usata per <a class="el" href="save__load_8cpp.html#acb0070d5c4365867ea8f18fa43328f72" title="Carica le carte da percorso/cards.txt e le inserisce in ordine in una lista. ">carica_carte</a> per inserire gli elementi in una lista in maniera ordinata.  <a href="#a790fdc654a9735345728889ca795f32a">Continua...</a><br /></td></tr>
+<tr class="separator:a790fdc654a9735345728889ca795f32a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb0070d5c4365867ea8f18fa43328f72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#acb0070d5c4365867ea8f18fa43328f72">carica_carte</a> ()</td></tr>
+<tr class="memdesc:acb0070d5c4365867ea8f18fa43328f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carica le carte da <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/cards.txt e le inserisce in ordine in una lista.  <a href="#acb0070d5c4365867ea8f18fa43328f72">Continua...</a><br /></td></tr>
+<tr class="separator:acb0070d5c4365867ea8f18fa43328f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94114f1b53829b60e81ba82f71092e43"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a94114f1b53829b60e81ba82f71092e43">salva_carte</a> ()</td></tr>
+<tr class="memdesc:a94114f1b53829b60e81ba82f71092e43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Salva le carte nella <a class="el" href="save__load_8cpp.html#a7e46151be5b23af7d46687f704b5d71d" title="Lista singola contenente le flashcards_t. ">lista</a> in <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/cards.txt .  <a href="#a94114f1b53829b60e81ba82f71092e43">Continua...</a><br /></td></tr>
+<tr class="separator:a94114f1b53829b60e81ba82f71092e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variabili</h2></td></tr>
+<tr class="memitem:a9435e5340e488d71749e2c3103ecd588"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a9435e5340e488d71749e2c3103ecd588">MASK</a></td></tr>
+<tr class="memdesc:a9435e5340e488d71749e2c3103ecd588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maschera di bit per decidere tra la modalita' di debug normale o verbosa.  <a href="#a9435e5340e488d71749e2c3103ecd588">Continua...</a><br /></td></tr>
+<tr class="separator:a9435e5340e488d71749e2c3103ecd588"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af172280da67b4d025098425a796c204a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structesame__t.html">esame_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#af172280da67b4d025098425a796c204a">esame</a></td></tr>
+<tr class="memdesc:af172280da67b4d025098425a796c204a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variabile di tipo <a class="el" href="structesame__t.html" title="Informazioni relative ad un esame. ">esame_t</a> in cui vengono contenuti tutti i dati di un esame.  <a href="#af172280da67b4d025098425a796c204a">Continua...</a><br /></td></tr>
+<tr class="separator:af172280da67b4d025098425a796c204a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ff1abd26580ac20bd5ac3fe92fa12ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpomodoro__t.html">pomodoro_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a8ff1abd26580ac20bd5ac3fe92fa12ec">timer</a></td></tr>
+<tr class="memdesc:a8ff1abd26580ac20bd5ac3fe92fa12ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variabile di tipo <a class="el" href="structpomodoro__t.html" title="Tempi per il timer. ">pomodoro_t</a> in cui vengono contenuti i tempi di <a class="el" href="structpomodoro__t.html#a0c9d57a4b5fb06a2d3840babd81a45f6" title="Tempo di lavoro, di default 25 minuti. ">pomodoro_t::lavoro</a>, <a class="el" href="structpomodoro__t.html#a95b273104e53f05b34a0cf66c43fa23d" title="Tempo di una pausa corta, di default 5 minuti. ">pomodoro_t::pausa_corta</a> e <a class="el" href="structpomodoro__t.html#a5940db12c71696526247aef778053292" title="Tempo di una pausa lunga, di default 15 minuti. ">pomodoro_t::pausa_lunga</a>.  <a href="#a8ff1abd26580ac20bd5ac3fe92fa12ec">Continua...</a><br /></td></tr>
+<tr class="separator:a8ff1abd26580ac20bd5ac3fe92fa12ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a352fa0558a7bae0c13fc79066be9e977"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977">percorso</a></td></tr>
+<tr class="memdesc:a352fa0558a7bae0c13fc79066be9e977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Percorso di caricamento/salvataggio dei dati scelto dall'utente.  <a href="#a352fa0558a7bae0c13fc79066be9e977">Continua...</a><br /></td></tr>
+<tr class="separator:a352fa0558a7bae0c13fc79066be9e977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e46151be5b23af7d46687f704b5d71d"><td class="memItemLeft" align="right" valign="top">GSList *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save__load_8cpp.html#a7e46151be5b23af7d46687f704b5d71d">lista</a> = NULL</td></tr>
+<tr class="memdesc:a7e46151be5b23af7d46687f704b5d71d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lista singola contenente le <a class="el" href="structflashcards__t.html" title="Informazioni relative ad una carta. ">flashcards_t</a>.  <a href="#a7e46151be5b23af7d46687f704b5d71d">Continua...</a><br /></td></tr>
+<tr class="separator:a7e46151be5b23af7d46687f704b5d71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>File che si occupa del salvataggio e del caricamento di <a class="el" href="structesame__t.html" title="Informazioni relative ad un esame. ">esame_t</a>, <a class="el" href="structpomodoro__t.html" title="Tempi per il timer. ">pomodoro_t</a> e <a class="el" href="structflashcards__t.html" title="Informazioni relative ad una carta. ">flashcards_t</a>. </p>
+</div><h2 class="groupheader">Documentazione delle definizioni</h2>
+<a class="anchor" id="af9daf8fa9b1aa8d19df9e06f33871a7e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEB</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5d0eafe6b6c5caf54766199e3d46c7da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VER</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Documentazione delle funzioni</h2>
+<a class="anchor" id="a4442bcbffc2ff7a663b354b6bffa20e8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool aggiungi_carta </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>domanda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>risposta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>scadenza</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Salva in <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/cards.txt una carta assieme alla scadenza. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac22acc63f903cd38cba9f8295ef36cdc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool carica_base </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Carica i dati da <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/data.txt . </p>
+<p>I dati vengono inseriti in esame. </p><dl class="section return"><dt>Restituisce</dt><dd>true se la lettura viene effettuata con successo </dd>
+<dd>
+false se il file non viene aperto correttamente </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acb0070d5c4365867ea8f18fa43328f72"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void carica_carte </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Carica le carte da <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/cards.txt e le inserisce in ordine in una lista. </p>
+<dl class="section return"><dt>Restituisce</dt><dd>un puntatore alla testa di una lista ordinata se la lettura e' stata effettuata correttamente </dd>
+<dd>
+NULL se la lettura non e' stata effettuata correttamente </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4eaee6dceb30fd1b20544d033f15dfd4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool carica_timer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Carica i tempi del timer da <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/times.txt . </p>
+<p>I dati vengono caricati in <a class="el" href="save__load_8cpp.html#a8ff1abd26580ac20bd5ac3fe92fa12ec" title="Variabile di tipo pomodoro_t in cui vengono contenuti i tempi di pomodoro_t::lavoro, pomodoro_t::pausa_corta e pomodoro_t::pausa_lunga. ">timer</a>. </p><dl class="section return"><dt>Restituisce</dt><dd>true se la lettura e' stata effettuata correttamente </dd>
+<dd>
+false se l'apertura del file ha fallito </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a790fdc654a9735345728889ca795f32a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gint compara_scadenze </td>
+          <td>(</td>
+          <td class="paramtype">gconstpointer&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gconstpointer&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione usata per <a class="el" href="save__load_8cpp.html#acb0070d5c4365867ea8f18fa43328f72" title="Carica le carte da percorso/cards.txt e le inserisce in ordine in una lista. ">carica_carte</a> per inserire gli elementi in una lista in maniera ordinata. </p>
+<p>g_slist_insert_sorted usa una GCompareFunc per determinare se l'elemento a deve essere inserito prima dell'elemento b. <br />
+In generale: </p><dl class="section return"><dt>Restituisce</dt><dd>&lt;0 se a &lt; b </dd>
+<dd>
+0 se a == b </dd>
+<dd>
+&gt;0 se a &gt; b </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7851c93b668f8107b543b8312b7187b1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nuovo_esame </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>giorni_st_sett</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>giorni_rip</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crea i dati principali per un nuovo esame nel percorso. </p>
+<p>Viene popolato inoltre <a class="el" href="save__load_8cpp.html#af172280da67b4d025098425a796c204a" title="Variabile di tipo esame_t in cui vengono contenuti tutti i dati di un esame. ">esame</a>.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">g,m,a</td><td>data dell'esame </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pag</td><td>pagine da studiare </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">giorni_st_sett</td><td>giorni di studio alla settimana </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">giorni_rip</td><td>giorni di ripasso </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a94114f1b53829b60e81ba82f71092e43"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool salva_carte </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Salva le carte nella <a class="el" href="save__load_8cpp.html#a7e46151be5b23af7d46687f704b5d71d" title="Lista singola contenente le flashcards_t. ">lista</a> in <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/cards.txt . </p>
+<dl class="section return"><dt>Restituisce</dt><dd>true se la scrittura e' stata effettuata correttamente </dd>
+<dd>
+false se il file non e' stato aperto correttamente </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a39578171d110b56ceb545a5c2780a298"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool salva_timer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scrive i tempi del timer in <a class="el" href="save__load_8cpp.html#a352fa0558a7bae0c13fc79066be9e977" title="Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. ">percorso</a>/times.txt. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentazione delle variabili</h2>
+<a class="anchor" id="af172280da67b4d025098425a796c204a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structesame__t.html">esame_t</a> esame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variabile di tipo <a class="el" href="structesame__t.html" title="Informazioni relative ad un esame. ">esame_t</a> in cui vengono contenuti tutti i dati di un esame. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7e46151be5b23af7d46687f704b5d71d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GSList* lista = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lista singola contenente le <a class="el" href="structflashcards__t.html" title="Informazioni relative ad una carta. ">flashcards_t</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9435e5340e488d71749e2c3103ecd588"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int MASK</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maschera di bit per decidere tra la modalita' di debug normale o verbosa. </p>
+
+</div>
+</div>
+<a class="anchor" id="a352fa0558a7bae0c13fc79066be9e977"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* percorso</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Percorso di caricamento/salvataggio dei dati scelto dall'utente. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8ff1abd26580ac20bd5ac3fe92fa12ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpomodoro__t.html">pomodoro_t</a> timer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variabile di tipo <a class="el" href="structpomodoro__t.html" title="Tempi per il timer. ">pomodoro_t</a> in cui vengono contenuti i tempi di <a class="el" href="structpomodoro__t.html#a0c9d57a4b5fb06a2d3840babd81a45f6" title="Tempo di lavoro, di default 25 minuti. ">pomodoro_t::lavoro</a>, <a class="el" href="structpomodoro__t.html#a95b273104e53f05b34a0cf66c43fa23d" title="Tempo di una pausa corta, di default 5 minuti. ">pomodoro_t::pausa_corta</a> e <a class="el" href="structpomodoro__t.html#a5940db12c71696526247aef778053292" title="Tempo di una pausa lunga, di default 15 minuti. ">pomodoro_t::pausa_lunga</a>. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>

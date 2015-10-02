@@ -1,3 +1,31 @@
+/**
+	@mainpage CStudy
+	
+	Suite per facilitare lo studio. Permette di calcolare tramite un wizard quante pagine si
+	dovranno studiare per un esame in una certa data, fornisce un timer che segue la
+	<a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" >pomodoro technique</a>
+	e un sistema per il ripasso tramite flashcards.
+	
+	Per la compilazione entrare nell cartella /src e digitare da terminale: @n
+	
+		make
+	
+	Se si vuole ottenere la modalita' di debug (normale e verboso): @n
+	
+		make debug
+	
+	E poi avviare il programma tramite l'icona se si e' scelta la compilazione normale, altrimenti
+	per la modalita' debug avviare il programma da terminale: @n
+		./CStudy DEB per la modalita' di debug semplice @n
+		./CStudy VER per la modalita' di debug verbosa
+	
+	@author Mirco Romagnoli
+*/
+/** @file
+	File che si occupa di avviare il gtk_main e di fornire una funzione che avvia un messaggio di errore,
+	inoltre contiene la ::MASK per il debug e il ::builder.
+*/
+
 #include <cstring>
 #ifdef DEBUG_MODE
 	#include "./include/debug.h"
@@ -13,10 +41,19 @@ using namespace std;
 
 #include "include/esame.h"
 
+/** Maschera di bit per decidere tra la modalita' di debug normale o verbosa.*/
 unsigned int MASK = 0 ;
+/** GtkBuilder per l'interfaccia grafica costruita con Glade.*/
 GtkBuilder *builder ;
 extern char *percorso ;
 
+/** Mostra un messaggio di errore.
+
+	Mostra il messaggio di errore, la finestra e' collegata a parent, in questo modo puo' apparire centrata
+	il modello della GtkDialog e' stato creato su glade.
+	@param[in] messaggio il messaggio di errore da mostrare
+	@param[in] parent finestra che chiama la funzione a cui collegare il dialogo
+*/
 void messaggio_errore (const char messaggio[], GtkWindow *parent)
 {
 	GObject *finestra = gtk_builder_get_object (builder,"Errore");
@@ -28,6 +65,12 @@ void messaggio_errore (const char messaggio[], GtkWindow *parent)
 		 gtk_widget_hide(GTK_WIDGET(finestra)) ;
 }
 
+/** Funzione principale.
+
+	Si occupa di preparare l'interfaccia grafica e di controllare se il programma e' stato chiamato con gli argomenti corretti
+	(in modalita' di debug).@n
+	Inizializza inoltre il sistema di notifica per il timer
+*/
 int main (int argc, char *argv[]) {
 	#ifdef DEBUG_MODE
 	if (argc < 2) {

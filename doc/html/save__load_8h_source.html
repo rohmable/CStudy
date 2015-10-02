@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.10"/>
+<title>CStudy:  File sorgente include/save_load.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="icon.gif"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">CStudy
+   </div>
+   <div id="projectbrief">Suite di studio</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.10 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pagina&#160;Principale</span></a></li>
+      <li><a href="annotated.html"><span>Strutture&#160;dati</span></a></li>
+      <li class="current"><a href="files.html"><span>File</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Cerca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Elenco&#160;dei&#160;file</span></a></li>
+      <li><a href="globals.html"><span>Elementi&#160;globali</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">save_load.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="save__load_8h.html">Vai alla documentazione di questo file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">char</span> *<a class="code" href="save__load_8h.html#a352fa0558a7bae0c13fc79066be9e977">percorso</a> ;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">extern</span> <a class="code" href="structesame__t.html">esame_t</a> <a class="code" href="save__load_8h.html#af172280da67b4d025098425a796c204a">esame</a> ;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">extern</span> <a class="code" href="structpomodoro__t.html">pomodoro_t</a> <a class="code" href="save__load_8h.html#a8ff1abd26580ac20bd5ac3fe92fa12ec">timer</a> ;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">extern</span> GSList *<a class="code" href="save__load_8h.html#a7e46151be5b23af7d46687f704b5d71d">lista</a> ;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="save__load_8h.html#a7851c93b668f8107b543b8312b7187b1">nuovo_esame</a> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> g, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> m, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> a, <span class="keywordtype">int</span> pag, <span class="keywordtype">int</span> giorni_st_sett, <span class="keywordtype">int</span> giorni_rip) ;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="save__load_8h.html#ac22acc63f903cd38cba9f8295ef36cdc">carica_base</a> ( ) ;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="save__load_8h.html#a4eaee6dceb30fd1b20544d033f15dfd4">carica_timer</a> ( ) ;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="save__load_8h.html#a39578171d110b56ceb545a5c2780a298">salva_timer</a> ( ) ;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="save__load_8h.html#a4442bcbffc2ff7a663b354b6bffa20e8">aggiungi_carta</a> (<span class="keyword">const</span> <span class="keywordtype">char</span> *domanda, <span class="keyword">const</span> <span class="keywordtype">char</span> *risposta, <span class="keywordtype">int</span> scadenza) ;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;gint <a class="code" href="save__load_8h.html#a790fdc654a9735345728889ca795f32a">compara_scadenze</a> (gconstpointer a, gconstpointer b) ;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> <a class="code" href="save__load_8h.html#acb0070d5c4365867ea8f18fa43328f72">carica_carte</a> () ;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="save__load_8h.html#a94114f1b53829b60e81ba82f71092e43">salva_carte</a> ( ) ;</div>
+<div class="ttc" id="structesame__t_html"><div class="ttname"><a href="structesame__t.html">esame_t</a></div><div class="ttdoc">Informazioni relative ad un esame. </div><div class="ttdef"><b>Definition:</b> esame.h:6</div></div>
+<div class="ttc" id="save__load_8h_html_af172280da67b4d025098425a796c204a"><div class="ttname"><a href="save__load_8h.html#af172280da67b4d025098425a796c204a">esame</a></div><div class="ttdeci">esame_t esame</div><div class="ttdoc">Variabile di tipo esame_t in cui vengono contenuti tutti i dati di un esame. </div><div class="ttdef"><b>Definition:</b> save_load.cpp:21</div></div>
+<div class="ttc" id="save__load_8h_html_a7e46151be5b23af7d46687f704b5d71d"><div class="ttname"><a href="save__load_8h.html#a7e46151be5b23af7d46687f704b5d71d">lista</a></div><div class="ttdeci">GSList * lista</div><div class="ttdoc">Lista singola contenente le flashcards_t. </div><div class="ttdef"><b>Definition:</b> save_load.cpp:25</div></div>
+<div class="ttc" id="save__load_8h_html_a39578171d110b56ceb545a5c2780a298"><div class="ttname"><a href="save__load_8h.html#a39578171d110b56ceb545a5c2780a298">salva_timer</a></div><div class="ttdeci">bool salva_timer()</div><div class="ttdoc">Scrive i tempi del timer in percorso/times.txt. </div><div class="ttdef"><b>Definition:</b> save_load.cpp:99</div></div>
+<div class="ttc" id="save__load_8h_html_a4442bcbffc2ff7a663b354b6bffa20e8"><div class="ttname"><a href="save__load_8h.html#a4442bcbffc2ff7a663b354b6bffa20e8">aggiungi_carta</a></div><div class="ttdeci">bool aggiungi_carta(const char *domanda, const char *risposta, int scadenza)</div><div class="ttdoc">Salva in percorso/cards.txt una carta assieme alla scadenza. </div><div class="ttdef"><b>Definition:</b> save_load.cpp:189</div></div>
+<div class="ttc" id="save__load_8h_html_a7851c93b668f8107b543b8312b7187b1"><div class="ttname"><a href="save__load_8h.html#a7851c93b668f8107b543b8312b7187b1">nuovo_esame</a></div><div class="ttdeci">bool nuovo_esame(unsigned int g, unsigned int m, unsigned int a, int pag, int giorni_st_sett, int giorni_rip)</div><div class="ttdoc">Crea i dati principali per un nuovo esame nel percorso. </div><div class="ttdef"><b>Definition:</b> save_load.cpp:143</div></div>
+<div class="ttc" id="save__load_8h_html_a790fdc654a9735345728889ca795f32a"><div class="ttname"><a href="save__load_8h.html#a790fdc654a9735345728889ca795f32a">compara_scadenze</a></div><div class="ttdeci">gint compara_scadenze(gconstpointer a, gconstpointer b)</div><div class="ttdoc">Funzione usata per carica_carte per inserire gli elementi in una lista in maniera ordinata...</div><div class="ttdef"><b>Definition:</b> save_load.cpp:238</div></div>
+<div class="ttc" id="save__load_8h_html_a4eaee6dceb30fd1b20544d033f15dfd4"><div class="ttname"><a href="save__load_8h.html#a4eaee6dceb30fd1b20544d033f15dfd4">carica_timer</a></div><div class="ttdeci">bool carica_timer()</div><div class="ttdoc">Carica i tempi del timer da percorso/times.txt . </div><div class="ttdef"><b>Definition:</b> save_load.cpp:74</div></div>
+<div class="ttc" id="structpomodoro__t_html"><div class="ttname"><a href="structpomodoro__t.html">pomodoro_t</a></div><div class="ttdoc">Tempi per il timer. </div><div class="ttdef"><b>Definition:</b> esame.h:20</div></div>
+<div class="ttc" id="save__load_8h_html_ac22acc63f903cd38cba9f8295ef36cdc"><div class="ttname"><a href="save__load_8h.html#ac22acc63f903cd38cba9f8295ef36cdc">carica_base</a></div><div class="ttdeci">bool carica_base()</div><div class="ttdoc">Carica i dati da percorso/data.txt . </div><div class="ttdef"><b>Definition:</b> save_load.cpp:34</div></div>
+<div class="ttc" id="save__load_8h_html_a94114f1b53829b60e81ba82f71092e43"><div class="ttname"><a href="save__load_8h.html#a94114f1b53829b60e81ba82f71092e43">salva_carte</a></div><div class="ttdeci">bool salva_carte()</div><div class="ttdoc">Salva le carte nella lista in percorso/cards.txt . </div><div class="ttdef"><b>Definition:</b> save_load.cpp:321</div></div>
+<div class="ttc" id="save__load_8h_html_a352fa0558a7bae0c13fc79066be9e977"><div class="ttname"><a href="save__load_8h.html#a352fa0558a7bae0c13fc79066be9e977">percorso</a></div><div class="ttdeci">char * percorso</div><div class="ttdoc">Percorso di caricamento/salvataggio dei dati scelto dall&#39;utente. </div><div class="ttdef"><b>Definition:</b> save_load.cpp:24</div></div>
+<div class="ttc" id="save__load_8h_html_a8ff1abd26580ac20bd5ac3fe92fa12ec"><div class="ttname"><a href="save__load_8h.html#a8ff1abd26580ac20bd5ac3fe92fa12ec">timer</a></div><div class="ttdeci">pomodoro_t timer</div><div class="ttdoc">Variabile di tipo pomodoro_t in cui vengono contenuti i tempi di pomodoro_t::lavoro, pomodoro_t::pausa_corta e pomodoro_t::pausa_lunga. </div><div class="ttdef"><b>Definition:</b> save_load.cpp:22</div></div>
+<div class="ttc" id="save__load_8h_html_acb0070d5c4365867ea8f18fa43328f72"><div class="ttname"><a href="save__load_8h.html#acb0070d5c4365867ea8f18fa43328f72">carica_carte</a></div><div class="ttdeci">void carica_carte()</div><div class="ttdoc">Carica le carte da percorso/cards.txt e le inserisce in ordine in una lista. </div><div class="ttdef"><b>Definition:</b> save_load.cpp:285</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.10
+</small></address>
+</body>
+</html>
