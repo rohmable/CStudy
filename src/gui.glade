@@ -925,6 +925,41 @@
       </object>
     </child>
   </object>
+  <object class="GtkMessageDialog" id="Timer_terminato">
+    <property name="can_focus">False</property>
+    <property name="window_position">center</property>
+    <property name="type_hint">notification</property>
+    <property name="transient_for">Timer</property>
+    <property name="attached_to">Timer</property>
+    <property name="message_type">warning</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">Il timer è terminato</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox11">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area11">
+            <property name="can_focus">False</property>
+            <property name="homogeneous">True</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkAdjustment" id="num_pagine">
     <property name="lower">1</property>
     <property name="upper">999</property>

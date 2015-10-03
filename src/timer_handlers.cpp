@@ -16,7 +16,6 @@ using namespace std ;
 #include "include/esame.h"
 #include "include/main.h"
 #include "include/save_load.h"
-#include "../lib/notify.h"
 
 /** Tipo per identificare il tipo di timer che e' in corso.*/
 enum tipo_timer_t {LAVORO, PAUSA_CORTA, PAUSA_LUNGA} ;
@@ -65,24 +64,28 @@ static gboolean countdown (gpointer user_data)
 	imposta_label_timer(timer_tempo, GTK_LABEL(gtk_builder_get_object(builder, "timer"))) ;
 	if ( timer_tempo == 0 ) {
 		timer_funzionante = false ;
-		NotifyNotification * stop = notify_notification_new ("CStudy", "Il timer e' terminato", "dialog-information") ;
-		notify_notification_show (stop, NULL) ;
-		g_object_unref(G_OBJECT(stop)) ;
 		GtkAdjustment *value ;
+		GtkMessageDialog *diag_fine = GTK_MESSAGE_DIALOG(gtk_builder_get_object(builder, "Timer_terminato")) ;
 		switch (timer_tipo) {
 		case LAVORO:
+			gtk_message_dialog_format_secondary_text(diag_fine, "Prenditi una pausa") ;
 			value = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "num_lavoro")) ;
 			break ;
 		case PAUSA_CORTA:
+			gtk_message_dialog_format_secondary_text(diag_fine, "Al lavoro!") ;
 			value = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "num_p_corte")) ;
 			break ;
 		case PAUSA_LUNGA:
+			gtk_message_dialog_format_secondary_text(diag_fine, "Al lavoro!") ;
 			value = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "num_p_lunghe")) ;
 			break ;
 		default:
 			break ;
 		}
 		gtk_adjustment_set_value(value, gtk_adjustment_get_value(value) + 1) ;
+		int risposta = gtk_dialog_run(GTK_DIALOG(diag_fine)) ;
+		if (risposta == GTK_RESPONSE_OK || risposta == GTK_RESPONSE_DELETE_EVENT)
+			gtk_widget_hide(GTK_WIDGET(diag_fine)) ;
 		return G_SOURCE_REMOVE ;
 	}
 	else
@@ -146,6 +149,9 @@ extern "C" gboolean timer_delete_event (GtkWidget *widget, GdkEvent  *event, gpo
 		g_source_remove(timer_tag) ;
 		timer_funzionante = false ;
 	}
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "lavoro_num")), 0.0) ;
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "corta_num")), 0.0) ;
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "lunga_num")), 0.0) ;
 	return gtk_widget_hide_on_delete(widget) ;
 }
 

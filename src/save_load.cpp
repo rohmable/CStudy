@@ -272,7 +272,7 @@ static void decrementa_scadenze ( )
 	VER(cout << "Decremento le scadenze di " << diff_da_ultimo_avvio << " giorni" << endl ) ;
 	GSList *elem = lista ;
 	while (elem != NULL) {
-		static_cast<flashcards_t *>(elem->data)->scadenza -= diff_da_ultimo_avvio ;
+		static_cast<flashcards_t *>(elem->data)->scadenza += diff_da_ultimo_avvio ;
 		elem = elem->next ;
 	}
 }

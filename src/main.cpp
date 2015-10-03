@@ -36,7 +36,6 @@
 #endif
 #include <gtk/gtk.h>
 #include <string>
-#include "../lib/notify.h"
 using namespace std;
 
 #include "include/esame.h"
@@ -101,9 +100,7 @@ int main (int argc, char *argv[]) {
 	builder = gtk_builder_new() ;
 	gtk_builder_add_from_file(builder, "gui.glade", NULL) ;
 	gtk_builder_connect_signals(builder, NULL) ;
-	notify_init ("CStudy");
 	gtk_main() ;
 	g_free(percorso) ;
-	notify_uninit();
 	return 0 ;
 }
