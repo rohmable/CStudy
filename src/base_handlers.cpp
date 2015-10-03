@@ -130,7 +130,9 @@ extern "C" void giorni_ripasso_modificato (GtkSpinButton *spin_button, gpointer 
 	}
 	GtkAssistant *wizard = GTK_ASSISTANT(gtk_widget_get_toplevel(GTK_WIDGET(spin_button))) ;
 	int pag_wizard = gtk_assistant_get_current_page(wizard) ;
+	VER(cout << "Pagina wizard: " << pag_wizard << endl ) ;
 	gtk_assistant_set_page_complete(wizard, gtk_assistant_get_nth_page(wizard, pag_wizard), pagina_completa) ;
+	gtk_assistant_set_page_complete(wizard, gtk_assistant_get_nth_page(wizard, pag_wizard+1), pagina_completa) ;
 }
 
 /** Mostra all'utente quante pagine al giorno dovra' studiare.*/

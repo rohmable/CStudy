@@ -1240,7 +1240,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="transient_for">Menu</property>
     <property name="attached_to">Menu</property>
-    <property name="use_header_bar">1</property>
+    <property name="use_header_bar">0</property>
     <signal name="apply" handler="applica_wizard" object="revealer2" swapped="no"/>
     <signal name="cancel" handler="annulla_wizard" swapped="no"/>
     <child>
@@ -1487,10 +1487,11 @@ che ti separano dall'esame</property>
       </object>
       <packing>
         <property name="page_type">confirm</property>
+        <property name="complete">True</property>
       </packing>
     </child>
     <child internal-child="action_area">
-      <object class="GtkBox" id="assistant-action_area1">
+      <object class="GtkBox" id="assistant-action_area">
         <property name="can_focus">False</property>
         <property name="halign">end</property>
         <property name="spacing">6</property>
@@ -1504,6 +1505,9 @@ che ti separano dall'esame</property>
           <placeholder/>
         </child>
       </object>
+      <packing>
+        <property name="complete">True</property>
+      </packing>
     </child>
   </object>
   <object class="GtkMessageDialog" id="messagedialog2">
