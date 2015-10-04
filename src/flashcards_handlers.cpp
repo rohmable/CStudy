@@ -4,6 +4,7 @@
 
 #include <gtk/gtk.h>
 #include <string>
+#include <climits>
 #ifdef DEBUG_MODE
 	#include "./include/debug.h"
 	#include <iostream>
@@ -20,6 +21,14 @@ using namespace std ;
 static GSList *elem_att = NULL ; /**< L'elemento attualmente stampato nella finestra del ripasso*/
 enum {GTK_BUTTON_CHIUDI = 1} ; /**< Usato per dare un significato all'azione del bottone chiudi in ::ripasso_clicked e 
 									::elimina_carte_clicked*/
+									
+/** Costanti per il riconoscimento dell'inizio e della fine della carte */
+static const string INIZIO_DOMANDA = "--INIZIO_DOMANDA--", FINE_DOMANDA = "--FINE_DOMANDA--",
+			 		INIZIO_RISPOSTA = "--INIZIO_RISPOSTA--", FINE_RISPOSTA = "--FINE_RISPOSTA--" ;
+
+									
+static int scadenza_max = 0 ;
+static const int MAX_CARTA = 250 ;
 
 #ifdef DEBUG_MODE
 
@@ -63,9 +72,9 @@ extern "C" void controlla_lun_testo (GtkTextBuffer *textbuffer, gpointer user_da
 {
 	VER(MASK = 1) ;
 	int lunghezza = gtk_text_buffer_get_char_count(textbuffer) ;
-	DEB(if (lunghezza >= 240) MASK = 3 ) ;
+	DEB(if (lunghezza >= MAX_CARTA - 10) MASK = 3 ) ;
 	VER(cout << "Lunghezza testo = " << lunghezza << endl ) ;
-	if (lunghezza >= 250) {
+	if (lunghezza >= MAX_CARTA) {
 		GtkTextIter iter;
 		int offset ;
 		g_object_get(G_OBJECT(textbuffer), "cursor-position", &offset, NULL) ;
@@ -111,11 +120,24 @@ extern "C" void salva_carta (GtkButton *button, gpointer user_data)
 	
 	gtk_text_buffer_get_start_iter(domanda_buff, &inizio) ;
 	gtk_text_buffer_get_end_iter(domanda_buff, &fine) ;
-	char *domanda = gtk_text_buffer_get_text(domanda_buff, &inizio, &fine, FALSE) ;
+	string domanda = gtk_text_buffer_get_text(domanda_buff, &inizio, &fine, FALSE) ;
+	if (domanda.find(INIZIO_DOMANDA.c_str(), 0) != string::npos || domanda.find(FINE_DOMANDA.c_str(), 0) != string::npos) {
+		gtk_revealer_set_reveal_child(GTK_REVEALER(gtk_builder_get_object(builder, "revealer5")), TRUE) ;
+		return ;
+	}
+	else
+		gtk_revealer_set_reveal_child(GTK_REVEALER(gtk_builder_get_object(builder, "revealer5")), FALSE) ;
+	
 	
 	gtk_text_buffer_get_start_iter(risposta_buff, &inizio) ;
 	gtk_text_buffer_get_end_iter(risposta_buff, &fine) ;
-	char *risposta = gtk_text_buffer_get_text(risposta_buff, &inizio, &fine, FALSE) ;
+	string risposta = gtk_text_buffer_get_text(risposta_buff, &inizio, &fine, FALSE) ;
+	if (risposta.find(INIZIO_RISPOSTA.c_str(), 0) != string::npos || risposta.find(FINE_RISPOSTA.c_str(), 0) != string::npos) {
+		gtk_revealer_set_reveal_child(GTK_REVEALER(gtk_builder_get_object(builder, "revealer5")), TRUE) ;
+		return ;
+	}
+	else
+		gtk_revealer_set_reveal_child(GTK_REVEALER(gtk_builder_get_object(builder, "revealer5")), FALSE) ;
 	
 	if(!aggiungi_carta(domanda, risposta, 1))
 		messaggio_errore("Impossibile salvare la carta", GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(button)))) ;
@@ -136,16 +158,16 @@ static void scrivi_carta (GSList *elem)
 
 /** Carica le carte, scrive la prima carta e si occupa di salvarle al termine del ripasso.
 
-	Questo handler si occupa di caricare le carte, se nella lista vi e' una carta con scadenza <= 0 la scrive,
-	se la lista e' nulla o non vi sono carte con scadenza <= 0 allora mostra un avviso. @n
+	Questo handler si occupa di caricare le carte, se nella lista vi e' una carta con scadenza <= scadenza_max la scrive,
+	se la lista e' nulla o non vi sono carte con scadenza <= scadenza_max allora mostra un avviso. @n
 	Al termine della sessione di ripasso aggiorna il file contenente le carte.
 */
-extern "C" void ripasso_clicked (GtkButton *button, gpointer user_data)
+static void apri_ripasso (GtkButton *button, gpointer user_data)
 {
 	VER(cout << "Apro la finestra di ripasso" << endl) ;
 	carica_carte() ;
 	VER(stampa_lista()) ;
-	if (lista != NULL && static_cast<flashcards_t *>(lista->data)->scadenza <= 0)
+	if (lista != NULL && static_cast<flashcards_t *>(lista->data)->scadenza <= scadenza_max)
 		scrivi_carta(lista) ;
 	else if (lista == NULL) {
 		messaggio_errore("Non e' presente alcuna carta", GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(button)))) ;
@@ -202,7 +224,7 @@ extern "C" void risposta_succ (GtkButton *button, gpointer user_data)
 	VER(stampa_lista()) ;
 	gtk_revealer_set_reveal_child(GTK_REVEALER(gtk_builder_get_object(builder, "revealer3")), FALSE) ;
 	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "button18")), TRUE) ;
-	if (static_cast<flashcards_t *>(lista->data)->scadenza <= 0)
+	if (static_cast<flashcards_t *>(lista->data)->scadenza <= scadenza_max)
 		scrivi_carta(lista) ;
 	else {
 		int risposta = gtk_dialog_run(GTK_DIALOG(user_data)) ;
@@ -318,7 +340,17 @@ extern "C" void elimina_carta (GtkButton *button, gpointer user_data)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(user_data), FALSE) ;
 }
 
+extern "C" void ripasso_clicked (GtkButton *button, gpointer user_data)
+{
+	scadenza_max = 0 ;
+	apri_ripasso(button, user_data) ;
+}
 
+extern "C" void ripassa_tutto_clicked (GtkButton *button, gpointer user_data)
+{
+	scadenza_max = INT_MAX ;
+	apri_ripasso(button, user_data) ;
+}
 
 
 

@@ -169,6 +169,7 @@ extern "C" void applica_wizard (GtkAssistant *assistant, gpointer user_data)
 		if (!nuovo_esame(g, m, a, pagine, studio_per_settimana, giorni_ripasso))
 			messaggio_errore("Impossibile creare l'esame, hai per caso scelto un percorso protetto da scrittura?", GTK_WINDOW(assistant)) ;
 		else {
+			// Come parametro viene passato il calcolo delle pagine da studiare ogni giorno
 			messaggio_pagine_al_giorno(calcola_pagine_al_giorno(g, m, a, pagine, studio_per_settimana, giorni_ripasso)) ;
 			gtk_widget_hide(GTK_WIDGET(assistant)) ;
 			gtk_widget_hide(GTK_WIDGET(gtk_builder_get_object(builder, "Menu"))) ;
@@ -201,10 +202,6 @@ extern "C" void carica (GtkButton *button, gpointer user_data)
 */
 extern "C" void main_menu_shown (GtkWidget *widget, gpointer user_data)
 {
-	gtk_widget_destroy(GTK_WIDGET(gtk_builder_get_object(builder, "Menu"))) ;
-	gtk_widget_destroy(GTK_WIDGET(gtk_builder_get_object(builder, "Wizard"))) ;
-	gtk_widget_destroy(GTK_WIDGET(gtk_builder_get_object(builder, "Carica_esame"))) ;
-	gtk_widget_destroy(GTK_WIDGET(gtk_builder_get_object(builder, "messagedialog2"))) ;
 	stringstream buff ;
 	int giorni_all_esame = diff_giorni_da_attuale(static_cast<int>(esame.g_esame), static_cast<int>(esame.m_esame - 1), static_cast<int>(esame.a_esame)) ;
 	if (giorni_all_esame > 1)

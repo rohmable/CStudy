@@ -24,6 +24,10 @@ pomodoro_t timer ; /**< Variabile di tipo ::pomodoro_t in cui vengono contenuti 
 char *percorso ; /**< Percorso di caricamento/salvataggio dei dati scelto dall'utente */
 GSList *lista = NULL ; /**< Lista singola contenente le ::flashcards_t */
 
+/** Costanti per il riconoscimento dell'inizio e della fine della carte */
+static const string INIZIO_DOMANDA = "--INIZIO_DOMANDA--", FINE_DOMANDA = "--FINE_DOMANDA--",
+			 		INIZIO_RISPOSTA = "--INIZIO_RISPOSTA--", FINE_RISPOSTA = "--FINE_RISPOSTA--" ;
+
 /**
 	Carica i dati da ::percorso/data.txt .						
 																
@@ -62,7 +66,17 @@ extern bool carica_base ()
 			 << "Pagine al giorno: " << esame.pag_per_giorno << endl ) ;
 	DEB(cout << "Caricamento dati di base effettuato con successo" << endl ) ;
 	data.close() ;
-	return true ;
+	bool dati_corretti = true ;
+	if (esame.g_ultimo_avvio <= 0 || esame.g_ultimo_avvio > 31) dati_corretti = false ;
+	if (esame.g_esame <= 0 || esame.g_esame > 31) dati_corretti = false ;
+	if (esame.m_ultimo_avvio <= 0 || esame.m_ultimo_avvio > 12) dati_corretti = false ;
+	if (esame.m_esame <= 0 || esame.m_esame > 12) dati_corretti = false ;
+	
+	/* Impedisce all'utente di modificare il file di salvataggio utilizzando date troppo indietro nel tempo 
+	   (rischiando di causare overflow nel decremento delle scadenze delle carte */
+	if (esame.a_ultimo_avvio < 1950) dati_corretti = false ;
+	if (esame.a_esame > 2500) dati_corretti = false ;
+	return dati_corretti ;
 }
 
 /** Carica i tempi del timer da ::percorso/times.txt .
@@ -175,18 +189,18 @@ extern bool nuovo_esame (unsigned int g, unsigned int m, unsigned int a, int pag
 
 	@param[in] stream file su cui scrivere, all'interno della funzione non vengono fatti controlli.
 */
-static void stampa_carta (ofstream &stream, const char *domanda, const char *risposta, int scadenza)
+static void stampa_carta (ofstream &stream, const string &domanda, const string &risposta, int scadenza)
 {
 	stream << scadenza << endl
-		   << "--INIZIO_DOMANDA--" << endl
+		   << INIZIO_DOMANDA << endl
 		   << domanda << endl
-		   << "--FINE_DOMANDA--" << endl << "--INIZIO_RISPOSTA--" << endl
+		   << FINE_DOMANDA << endl << INIZIO_RISPOSTA << endl
 		   << risposta << endl 
-		   << "--FINE_RISPOSTA--" << endl ;
+		   << FINE_RISPOSTA << endl ;
 }
 
 /** Salva in ::percorso/cards.txt una carta assieme alla scadenza. */
-extern bool aggiungi_carta (const char *domanda, const char *risposta, int scadenza)
+extern bool aggiungi_carta (const string &domanda, const string &risposta, int scadenza)
 {
 	string file = percorso ;
 	file += "/cards.txt" ;
@@ -211,7 +225,7 @@ extern bool aggiungi_carta (const char *domanda, const char *risposta, int scade
 	@param[in] inizio prima stringa delimitatrice
 	@param[in] fine seconda stringa delimitatrice
 */
-static void leggi_tra_delim (istream &stream, string &stringa, const string &inizio, const string &fine)
+static void leggi_tra_delim (istream &stream, string &stringa, const string inizio, const string fine)
 {
 	string buff ;
 	getline(stream, buff) ;
@@ -306,8 +320,8 @@ extern void carica_carte ( )
 			decrementa_scadenze() ;
 			return ;
 		}
-		leggi_tra_delim(carte, elem->domanda, "--INIZIO_DOMANDA--", "--FINE_DOMANDA--") ;
-		leggi_tra_delim(carte, elem->risposta, "--INIZIO_RISPOSTA--", "--FINE_RISPOSTA--") ;
+		leggi_tra_delim(carte, elem->domanda, INIZIO_DOMANDA, FINE_DOMANDA) ;
+		leggi_tra_delim(carte, elem->risposta, INIZIO_RISPOSTA, FINE_RISPOSTA) ;
 		gpointer data = static_cast<gpointer>(elem) ;
 		lista = g_slist_insert_sorted(lista, data, compara_scadenze) ;
 	}
@@ -331,7 +345,7 @@ extern bool salva_carte ( )
 	VER(cout << "Salvo le carte in \"" << file << '\"' << endl ) ;
 	GSList *elem = lista ;
 	while (elem != NULL) {
-		stampa_carta(carte, static_cast<flashcards_t *>(elem->data)->domanda.c_str(), static_cast<flashcards_t *>(elem->data)->risposta.c_str(),
+		stampa_carta(carte, static_cast<flashcards_t *>(elem->data)->domanda, static_cast<flashcards_t *>(elem->data)->risposta,
 					static_cast<flashcards_t *>(elem->data)->scadenza) ;
 		elem = elem->next ;
 	}

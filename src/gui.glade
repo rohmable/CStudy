@@ -84,6 +84,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Aggiungi delle carte al tuo mazzo</property>
             <signal name="clicked" handler="handler_apri_finestra" object="Crea_carte" swapped="no"/>
           </object>
           <packing>
@@ -98,6 +99,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Ripassa le carte tenendo conto delle scadenze</property>
             <signal name="clicked" handler="ripasso_clicked" object="Ripassa" swapped="no"/>
           </object>
           <packing>
@@ -107,17 +109,33 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button5">
-            <property name="label" translatable="yes">Elimina carte</property>
+          <object class="GtkButton" id="button23">
+            <property name="label" translatable="yes">Ripassa Tutto</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="elimina_carte_clicked" object="Elimina_carte" swapped="no"/>
+            <property name="tooltip_text" translatable="yes">Ripassa tutte le carte senza tenere conto delle scadenze</property>
+            <signal name="clicked" handler="ripassa_tutto_clicked" object="Ripassa" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button5">
+            <property name="label" translatable="yes">Elimina carte</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="tooltip_text" translatable="yes">Apre lo strumento per l'eliminazione delle carte</property>
+            <signal name="clicked" handler="elimina_carte_clicked" object="Elimina_carte" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
           </packing>
         </child>
         <child>
@@ -132,7 +150,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">5</property>
+            <property name="position">6</property>
           </packing>
         </child>
       </object>
@@ -225,7 +243,7 @@
     <property name="title" translatable="yes">Carica esame</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
-    <property name="icon">icon.png</property>
+    <property name="icon">icon.gif</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">Menu</property>
     <property name="attached_to">Menu</property>
@@ -460,6 +478,33 @@
                 <property name="fill">True</property>
                 <property name="position">5</property>
               </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRevealer" id="revealer5">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel" id="label28">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xpad">2</property>
+                <property name="label" translatable="yes">Il testo non può contenere le stringhe di controllo:
+"--INIZIO_DOMANDA--"
+"--FINE_DOMANDA--"
+"--INIZIO_RISPOSTA--"
+"--FINE_RISPOSTA--"</property>
+                <property name="xalign">0</property>
+                <attributes>
+                  <attribute name="foreground" value="#efef29292929"/>
+                </attributes>
+              </object>
             </child>
           </object>
           <packing>
