@@ -71,11 +71,11 @@ extern bool carica_base ()
 	if (esame.g_esame <= 0 || esame.g_esame > 31) dati_corretti = false ;
 	if (esame.m_ultimo_avvio <= 0 || esame.m_ultimo_avvio > 12) dati_corretti = false ;
 	if (esame.m_esame <= 0 || esame.m_esame > 12) dati_corretti = false ;
-	
+
 	/* Impedisce all'utente di modificare il file di salvataggio utilizzando date troppo indietro nel tempo 
 	   (rischiando di causare overflow nel decremento delle scadenze delle carte */
-	if (esame.a_ultimo_avvio < 1950) dati_corretti = false ;
-	if (esame.a_esame > 2500) dati_corretti = false ;
+	if (esame.a_ultimo_avvio < 1970) dati_corretti = false ;
+	if (esame.a_esame > 4000) dati_corretti = false ;
 	return dati_corretti ;
 }
 

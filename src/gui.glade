@@ -49,14 +49,18 @@
       <object class="GtkBox" id="box5">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="margin_left">5</property>
+        <property name="margin_right">5</property>
+        <property name="margin_top">5</property>
+        <property name="margin_bottom">5</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
+        <property name="spacing">8</property>
         <child>
           <object class="GtkLabel" id="label11">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">label</property>
             <property name="xalign">0.019999999552965164</property>
+            <property name="label" translatable="yes">label</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -170,8 +174,8 @@
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_left">5</property>
-        <property name="margin_right">5</property>
+        <property name="margin_left">10</property>
+        <property name="margin_right">10</property>
         <property name="margin_top">5</property>
         <property name="margin_bottom">5</property>
         <property name="orientation">vertical</property>
@@ -359,9 +363,9 @@
               <object class="GtkLabel" id="label16">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0</property>
                 <property name="xpad">2</property>
                 <property name="label" translatable="yes">Inserisci la domanda</property>
-                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -389,9 +393,9 @@
               <object class="GtkLabel" id="label23">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0</property>
                 <property name="xpad">2</property>
                 <property name="label" translatable="yes">Inserisci la risposta</property>
-                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -464,9 +468,9 @@
                   <object class="GtkLabel" id="label26">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
                     <property name="xpad">2</property>
                     <property name="label" translatable="yes">Il testo non puo' contenere piu' di 250 caratteri</property>
-                    <property name="xalign">0</property>
                     <attributes>
                       <attribute name="foreground" value="#efef29292929"/>
                     </attributes>
@@ -494,13 +498,13 @@
               <object class="GtkLabel" id="label28">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0</property>
                 <property name="xpad">2</property>
                 <property name="label" translatable="yes">Il testo non può contenere le stringhe di controllo:
 "--INIZIO_DOMANDA--"
 "--FINE_DOMANDA--"
 "--INIZIO_RISPOSTA--"
 "--FINE_RISPOSTA--"</property>
-                <property name="xalign">0</property>
                 <attributes>
                   <attribute name="foreground" value="#efef29292929"/>
                 </attributes>
@@ -572,10 +576,10 @@
               <object class="GtkLabel" id="label12">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0</property>
                 <property name="xpad">2</property>
                 <property name="ypad">2</property>
                 <property name="label" translatable="yes">Seleziona la carta da eliminare e poi premi elimina</property>
-                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -783,8 +787,8 @@
               <object class="GtkLabel" id="label13">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Lavoro</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Lavoro</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -811,8 +815,8 @@
               <object class="GtkLabel" id="label14">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Pause corte</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Pause corte</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -839,8 +843,8 @@
               <object class="GtkLabel" id="label15">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Pause Lunghe</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Pause Lunghe</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1058,9 +1062,9 @@
               <object class="GtkLabel" id="label24">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0</property>
                 <property name="xpad">5</property>
                 <property name="label" translatable="yes">Domanda</property>
-                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1088,9 +1092,9 @@
               <object class="GtkLabel" id="label25">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xalign">0</property>
                 <property name="xpad">5</property>
                 <property name="label" translatable="yes">Risposta</property>
-                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1309,8 +1313,8 @@ Qui potrai organizzare un nuovo esame</property>
           <object class="GtkLabel" id="label4">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Inserire la data dell'esame:</property>
             <property name="xalign">0</property>
+            <property name="label" translatable="yes">Inserire la data dell'esame:</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1349,8 +1353,8 @@ Qui potrai organizzare un nuovo esame</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">Numero di pagine da studiare:</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Numero di pagine da studiare:</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1377,9 +1381,9 @@ Qui potrai organizzare un nuovo esame</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
+                <property name="xalign">0</property>
                 <property name="label" translatable="yes">Numero di giorni di studio alla settimana:
 (1 giorno = 8h di studio)</property>
-                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1408,8 +1412,8 @@ Qui potrai organizzare un nuovo esame</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">Giorni di ripasso prima dell'esame:</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Giorni di ripasso prima dell'esame:</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1441,11 +1445,11 @@ Qui potrai organizzare un nuovo esame</property>
           <object class="GtkLabel" id="label27">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="xalign">0</property>
             <property name="xpad">2</property>
             <property name="ypad">2</property>
             <property name="label" translatable="yes">Si consiglia di scegliere il 10% dei giorni che separano dall'esame
 per il ripasso</property>
-            <property name="xalign">0</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1460,9 +1464,9 @@ per il ripasso</property>
             <child>
               <object class="GtkLabel" id="label9">
                 <property name="can_focus">False</property>
+                <property name="xalign">0</property>
                 <property name="label" translatable="yes">I giorni di ripasso devono essere minori del numero di giorni
 che ti separano dall'esame</property>
-                <property name="xalign">0</property>
                 <attributes>
                   <attribute name="foreground" value="#efef29292929"/>
                 </attributes>
@@ -1487,8 +1491,8 @@ che ti separano dall'esame</property>
           <object class="GtkLabel" id="label5">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Scegli dove salvare i tuoi dati:</property>
             <property name="xalign">0</property>
+            <property name="label" translatable="yes">Scegli dove salvare i tuoi dati:</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1515,8 +1519,8 @@ che ti separano dall'esame</property>
             <child>
               <object class="GtkLabel" id="label10">
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Scegliere un percorso valido per continuare</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Scegliere un percorso valido per continuare</property>
                 <attributes>
                   <attribute name="foreground" value="#efef29292929"/>
                 </attributes>
@@ -1672,8 +1676,8 @@ che ti separano dall'esame</property>
               <object class="GtkLabel" id="label17">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Durata tempo di lavoro</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Durata tempo di lavoro</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1684,8 +1688,8 @@ che ti separano dall'esame</property>
               <object class="GtkLabel" id="label18">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Durata pausa corta</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Durata pausa corta</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1696,8 +1700,8 @@ che ti separano dall'esame</property>
               <object class="GtkLabel" id="label19">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Durata pausa lunga</property>
                 <property name="xalign">0</property>
+                <property name="label" translatable="yes">Durata pausa lunga</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1750,8 +1754,8 @@ che ti separano dall'esame</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">minuti</property>
                 <property name="xalign">0.039999999105930328</property>
+                <property name="label" translatable="yes">minuti</property>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -1763,8 +1767,8 @@ che ti separano dall'esame</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">minuti</property>
                 <property name="xalign">0.039999999105930328</property>
+                <property name="label" translatable="yes">minuti</property>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -1776,8 +1780,8 @@ che ti separano dall'esame</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">minuti</property>
                 <property name="xalign">0.039999999105930328</property>
+                <property name="label" translatable="yes">minuti</property>
               </object>
               <packing>
                 <property name="left_attach">2</property>
